@@ -27,3 +27,10 @@ Raspberry Pi digital signage: drives a consumer TV over HDMI like a commercial d
 - `provisioning/` — flashing / cloud-init notes.
 
 Screen blanking disabled via `raspi-config nonint do_blanking 1`.
+- `pi/systemd/cec-wake.{service,timer}` — at boot and every 5 min, `bin/cec-wake.sh` sends CEC Image View On + Active Source to the TV on whichever HDMI port has a sink. Install: `sudo install -m644 pi/systemd/cec-wake.* /etc/systemd/system/ && sudo systemctl enable --now cec-wake.service cec-wake.timer`.
+
+## HDMI hotplug
+
+The current cable/monitor never asserts hotplug-detect, so `cmdline.txt` carries `video=HDMI-A-2:D` to force
+the port on (modes still come from EDID). Use HDMI-A-2 = the board's second micro-HDMI (further from USB-C).
+Without it the Pi sees both ports as disconnected and CEC has no physical address.

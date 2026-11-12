@@ -1,0 +1,10 @@
+[Unit]
+Description=Wake HDMI display via CEC and select this input
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/pi/bin/cec-wake.sh
+
+[Install]
+WantedBy=graphical.target
