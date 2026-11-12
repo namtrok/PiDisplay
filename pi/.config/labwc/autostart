@@ -1,0 +1,3 @@
+# Kiosk-only session: no panel/file manager, just the browser.
+/usr/bin/kanshi &
+"$HOME/bin/kiosk.sh" &

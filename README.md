@@ -17,3 +17,13 @@ Raspberry Pi digital signage: drives a consumer TV over HDMI like a commercial d
 4. `sudo ./rpiboot -d mass-storage-gadget64` — the Pi's storage appears on the Mac as a disk.
 5. Write Raspberry Pi OS with Raspberry Pi Imager (preset user, Wi-Fi, SSH).
 6. Unplug, power from the CanaKit supply, then SSH in.
+
+## Layout
+
+- `pi/` — files deployed to `/home/pi` on the Pi (`rsync -a pi/bin pi/.config pi@pidisplay.local:~/`).
+  - `bin/kiosk.sh` — Chromium `--kiosk` loop, respawns on exit.
+  - `.config/kiosk-url` — URL to display.
+  - `.config/labwc/autostart` — launches the kiosk in the labwc (Wayland) session.
+- `provisioning/` — flashing / cloud-init notes.
+
+Screen blanking disabled via `raspi-config nonint do_blanking 1`.
